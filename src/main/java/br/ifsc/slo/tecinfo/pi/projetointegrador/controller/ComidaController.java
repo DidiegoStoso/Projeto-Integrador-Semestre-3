@@ -25,7 +25,7 @@ public class ComidaController {
     @GetMapping("cadastrar")
     public String showSignUpdateForm(Comida food, Model model){
 
-        model.addAttribute("comidas", ComidaRepositorio.findAll());
+        model.addAttribute("comidas", repositorio.findAll());
         return "add-prato";
     }
 
