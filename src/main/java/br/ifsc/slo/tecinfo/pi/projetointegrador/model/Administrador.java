@@ -10,12 +10,12 @@ public class Administrador {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codigo;
+    private int codAdm;
     private String login;
     private String senha;
 
-    public Administrador( int codigo, String login, String senha){
-        this.codigo = codigo;
+    public Administrador( int codAdm, String login, String senha){
+        this.codAdm = codAdm;
         this.login = login;
         this.senha = senha;
     }
@@ -23,12 +23,12 @@ public class Administrador {
     public Administrador(){
     }
 
-    public int getCodigo() {
-        return codigo;
+    public int getCodAdm() {
+        return codAdm;
     }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public void setCodAdm(int codAdm) {
+        this.codAdm = codAdm;
     }
 
     public String getLogin() {

@@ -6,29 +6,29 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Comida {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private int codComida;
+    private int codItem;
     private String descricao;
     private int valor;
 
-    public Comida( int codComida, String descricao, int valor){
-        this.codComida = codComida;
+    public Item(int codItem, String descricao, int valor){
+        this.codItem = codItem;
         this.descricao = descricao;
         this.valor = valor;
     }
 
-    public Comida(){
+    public Item(){
     }
 
-    public int getCodComida() {
-        return codComida;
+    public int getCodItem() {
+        return codItem;
     }
 
-    public void setCodComida(int codComida) {
-        this.codComida = codComida;
+    public void setCodItem(int codItem) {
+        this.codItem = codItem;
     }
 
     public String getDescricao() {
