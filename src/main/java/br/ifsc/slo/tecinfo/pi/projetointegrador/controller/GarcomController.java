@@ -28,7 +28,7 @@ public class GarcomController {
 
     @PostMapping("/cadastrar")
     public String registerUserAccount(@Valid Garcom garcom, BindingResult result){
-        garcomService.save(garcom);
+        repositorio.save(garcom);
         return "redirect:/itens/mostrar";
     }
 

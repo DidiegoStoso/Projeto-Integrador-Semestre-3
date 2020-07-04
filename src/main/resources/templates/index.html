@@ -56,20 +56,20 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr th:each="comida : ${comidas}">
-                                <td th:text="${comida.codComida}"></td>
-                                <td th:text="${comida.descricao}"></td>
-                                <td th:text="${comida.valor}"></td>
+                            <tr th:each="item : ${itens}">
+                                <td th:text="${item.codItem}"></td>
+                                <td th:text="${item.descricao}"></td>
+                                <td th:text="${item.valor}"></td>
                                 <td sec:authorize="hasRole('GARCOM')"><a
-                                        th:href="/comidas/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
+                                        th:href="/itens/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
                                         class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></a>
                                 </td>
                                 <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/comidas/editar/{matricula}(matricula=${estudante.matricula})}"
+                                        th:href="@{/itens/editar/{codItem}(codItem=${item.codItem})}"
                                         class="btn btn-primary" ><i class="fas fa-user-edit ml-2">Editar</i></a>
                                 </td>
                                 <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/comidas/apagar/{codComida}(codComida=${comida.codComida})}"
+                                        th:href="@{/itens/apagar/{codItem}(codItem=${item.codItem})}"
                                         class="btn btn-primary"><i class="fas fa-user-times ml-2">Apagar</i></a></td>
                             </tr>
                             </tbody>

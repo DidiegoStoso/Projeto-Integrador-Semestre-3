@@ -20,8 +20,6 @@ import java.util.List;
 @RequestMapping("/itens/")
 public class ItemController {
 
-    //private List<Item> itens = new ArrayList<>();
-
     private ItemRepositorio repositorio;
     @Autowired
     private ItemController(ItemRepositorio repositorio){ this.repositorio = repositorio; }
