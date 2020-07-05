@@ -28,7 +28,7 @@
             </div>
 
             <h1>Cadastro de Garçons</h1>
-            <form th:action="@{/garcom/cadastro}" th:object="${garcom}" method="post">
+            <form th:action="@{/garcom/cadastrar}" th:object="${garcom}" method="post">
                 <div class="row p-3">
                     <label for="cpf" class="control-label  col-md-2">CPF: </label> <input
                         id="cpf" class="form-control  col-md-10 " th:field="*{cpf}" />

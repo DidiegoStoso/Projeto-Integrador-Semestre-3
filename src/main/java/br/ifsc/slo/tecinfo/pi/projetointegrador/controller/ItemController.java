@@ -28,7 +28,7 @@ public class ItemController {
     public String showSignUpdateForm(Item item, Model model){
 
         model.addAttribute("itens", repositorio.findAll());
-        return "add-prato";
+        return "add-item";
     }
 
     @GetMapping("mostrar")
@@ -40,7 +40,7 @@ public class ItemController {
     @PostMapping("add")
     public String addItem(@Valid Item item, BindingResult result, Model model) {
         repositorio.save(item);
-        return "redirect:mostrar";
+        return "redirect:/itens/mostrar";
     }
 
     @GetMapping("update/{codItem}")

@@ -9,11 +9,10 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Repository;
-import javax.transaction.Transactional;
-import java.awt.image.BandCombineOp;
 import java.util.ArrayList;
 import java.util.List;
+import javax.transaction.Transactional;
+import org.springframework.stereotype.Repository;
 
 @Repository
 @Transactional
@@ -32,16 +31,4 @@ public class ImplementsUserDetailsService implements UserDetailsService {
         return new User(garcom.getLogin(), garcom.getSenha(), true, true, true, true, garcom.getAuthorities());
     }
 
-    public Garcom save(Garcom waiter){
-        Garcom garcom = new Garcom();
-        garcom.setCpf(waiter.getCpf());
-        garcom.setNome(waiter.getNome());
-        garcom.setEmail(waiter.getEmail());
-        garcom.setLogin(waiter.getLogin());
-        garcom.setSenha(new BCryptPasswordEncoder().encode(waiter.getPassword()));
-        List<Role> roles = new ArrayList<>();
-        roles.add(new Role("ROLE_GARCOM"));
-        garcom.setRoles(roles);
-        return ur.save(garcom);
-    }
 }

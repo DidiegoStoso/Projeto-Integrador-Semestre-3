@@ -8,7 +8,7 @@ import java.util.Collection;
 import java.util.List;
 
 @Entity
-public class Garcom implements UserDetails {
+public class Garcom implements UserDetails{
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -18,19 +18,13 @@ public class Garcom implements UserDetails {
     private String email;
     private String login;
     private String senha;
-    @ManyToMany(cascade = CascadeType.ALL)
-    @JoinTable(
-        name = "garcons_roles",
-            joinColumns = @JoinColumn(
-                    name = "garcom_id",referencedColumnName = "codGarcom"),
-            inverseJoinColumns = @JoinColumn (
-                    name = "role_id", referencedColumnName = "codRole"))
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Role> roles;
 
     public Garcom(){
     }
 
-    public Garcom( int codigo, long cpf, String nome, String email, String login, String senha, List<Role> roles){
+    public Garcom(int codGarcom, long cpf, String nome, String email, String login, String senha, List<Role> roles) {
         this.codGarcom = codGarcom;
         this.cpf = cpf;
         this.nome = nome;
@@ -40,12 +34,13 @@ public class Garcom implements UserDetails {
         this.roles = roles;
     }
 
-    public List<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(List<Role> roles) {
-        this.roles = roles;
+    public Garcom(int codGarcom, long cpf, String nome, String email, String login, String senha) {
+        this.codGarcom = codGarcom;
+        this.cpf = cpf;
+        this.nome = nome;
+        this.email = email;
+        this.login = login;
+        this.senha = senha;
     }
 
     public int getCodGarcom() {
@@ -96,10 +91,15 @@ public class Garcom implements UserDetails {
         this.senha = senha;
     }
 
-    @Override
-    public String toString(){
-        return "Garcom{" + "codigo" + codGarcom + ", cpf=" + cpf + ", nome=" + nome + ", e-mail=" + email + '}';
+    public List<Role> getRoles() {
+        return roles;
     }
+
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
+    
+    
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -135,4 +135,7 @@ public class Garcom implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    
+    
 }

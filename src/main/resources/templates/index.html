@@ -36,7 +36,7 @@
                     </div>
 
                     <p class="my-5">
-                        <a href="/comidas/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
+                        <a href="/itens/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
                                 class="fas fa-user-plus ml-2 "> Adicionar Prato</i></a>
                     </p>
 
@@ -61,7 +61,7 @@
                                 <td th:text="${item.descricao}"></td>
                                 <td th:text="${item.valor}"></td>
                                 <td sec:authorize="hasRole('GARCOM')"><a
-                                        th:href="/itens/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
+                                        th:href="@{/itens/cadastrar}" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
                                         class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></a>
                                 </td>
                                 <td sec:authorize="hasRole('ADMIN')"><a

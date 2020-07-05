@@ -1,10 +1,11 @@
 package br.ifsc.slo.tecinfo.pi.projetointegrador.model;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthoritiesContainer;
 
-import javax.persistence.*;
-import java.util.List;
 
 @Entity
 public class Role implements GrantedAuthority {
@@ -13,14 +14,12 @@ public class Role implements GrantedAuthority {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int codRole;
     private String nomeRole;
-    @ManyToMany(mappedBy = "roles")
-    private List<Garcom> garcons;
 
     public Role(String nomeRole){
         this.nomeRole = nomeRole;
     }
 
-    public Role(){
+    public Role(){ 
     }
 
     public int getCodRole(){
@@ -41,6 +40,6 @@ public class Role implements GrantedAuthority {
 
     @Override
     public String getAuthority() {
-        return nomeRole;
+        return this.nomeRole;
     }
 }

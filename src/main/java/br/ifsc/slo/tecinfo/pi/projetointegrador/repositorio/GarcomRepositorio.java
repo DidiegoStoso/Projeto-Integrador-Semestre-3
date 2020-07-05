@@ -5,4 +5,5 @@ import org.springframework.data.repository.CrudRepository;
 
 public interface GarcomRepositorio extends CrudRepository<Garcom, Integer> {
     Garcom findByLogin(String login);
+    
 }

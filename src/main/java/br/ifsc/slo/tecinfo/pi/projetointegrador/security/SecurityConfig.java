@@ -20,13 +20,21 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception{
         http
-            .formLogin()
-            .loginPage("/login")
-            .defaultSuccessUrl("/itens/mostrar", true)
-            .permitAll()
-            .and()
-            .logout()
-            .permitAll();
+                .authorizeRequests()
+                .antMatchers("/", "/itens/mostrar","/garcom/cadastrar").permitAll() 
+                //.antMatchers("/*/cadastrar").access("hasRole('USER')") //exemplo para permitir acesso a uma pagina apenas para quem tem role USER (apenas exemplo)
+                //.antMatchers("/*/add").access("hasRole('USER')")
+                .anyRequest().authenticated()
+                //.and()
+                //.exceptionHandling().accessDeniedPage("/403")
+                .and()
+                .formLogin() 
+                .loginPage("/login")
+                .defaultSuccessUrl("/itens/mostrar", true)
+                .permitAll()
+                .and()
+                .logout()
+                .permitAll();
     }
 
     @Autowired
