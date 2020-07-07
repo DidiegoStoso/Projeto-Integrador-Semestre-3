@@ -43,7 +43,16 @@ public class ItemController {
         return "redirect:/itens/mostrar";
     }
 
-    @GetMapping("update/{codItem}")
+    @GetMapping("editar/{codItem}")
+    public String showUpdateForm(@PathVariable("codItem") int codItem, Model model){
+        Item item = repositorio.findById(codItem)
+                .orElseThrow(() -> new IllegalArgumentException("Código do item inválido: " + codItem));
+        model.addAttribute("item", item);
+        model.addAttribute("itens", repositorio.findAll());
+        return "update-item";
+    }
+
+    @PostMapping("update/{codItem}")
     public String updateItem(@PathVariable("codItem") int codItem, @Valid Item item, Model model){
         repositorio.save(item);
         return "redirect:/itens/mostrar";

@@ -24,11 +24,14 @@
             <div th:switch="${itens}" class="container my-5">
                 <div>
                     <div sec:authorize="isAuthenticated()">
-                        <h3>Olá, GARÇOM/ADM!</h3>
+                        <h3>Olá, [[${#httpServletRequest.remoteUser}]] !</h3>
                     </div>
                     <div class="my-5" >
                         <a href="/login" sec:authorize="!isAuthenticated()" class="btn btn-primary"><i
                                 class="fas"> Fazer Login</i></a>
+
+                        <a href="/garcom/cadastrar" sec:authorize="!isAuthenticated()" class="btn btn-primary"><i
+                                class="fas"> Fazer cadastro</i></a>
 
                         <form th:action="@{/logout}"  method="post" sec:authorize="isAuthenticated()">
                             <button type="submit" class="btn btn-primary"><i class="fas">Fazer Logout</i></button>
@@ -42,7 +45,7 @@
 
                 </div>
                 <div class="col-md-10">
-                    <h2 th:case="null">Pizzas!</h2>
+                    <h2 th:case="null">Pratos!</h2>
                     <div th:case="*">
                         <table class="table table-striped table-responsive-md">
                             <thead>
@@ -51,8 +54,8 @@
                                 <th>Descrição</th>
                                 <th>Valor</th>
                                 <th sec:authorize="hasRole('GARCOM')">Adicionar Pedido</th>
-                                <th sec:authorize="hasRole('ADMIN')">Editar</th>
-                                <th sec:authorize="hasRole('ADMIN')">Apagar</th>
+                                <th sec:authorize="hasRole('GARCOM')">Editar</th>
+                                <th sec:authorize="hasRole('GARCOM')">Apagar</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -61,98 +64,21 @@
                                 <td th:text="${item.descricao}"></td>
                                 <td th:text="${item.valor}"></td>
                                 <td sec:authorize="hasRole('GARCOM')"><a
-                                        th:href="@{/itens/cadastrar}" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
-                                        class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></a>
+                                       <button type="submit" id="add-pedido" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
+                                               class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></button></a>
                                 </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
+                                <td sec:authorize="hasRole('GARCOM')"><a
                                         th:href="@{/itens/editar/{codItem}(codItem=${item.codItem})}"
                                         class="btn btn-primary" ><i class="fas fa-user-edit ml-2">Editar</i></a>
                                 </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
+                                <td sec:authorize="hasRole('GARCOM')"><a
                                         th:href="@{/itens/apagar/{codItem}(codItem=${item.codItem})}"
                                         class="btn btn-primary"><i class="fas fa-user-times ml-2">Apagar</i></a></td>
                             </tr>
                             </tbody>
                         </table>
-
+                        </div>
                     </div>
-
-                </div>
-
-                <div class="col-md-10">
-                    <h2 th:case="null">Lanches!</h2>
-                    <div th:case="*">
-                        <table class="table table-striped table-responsive-md">
-                            <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                                <th sec:authorize="hasRole('GARCOM')">Adicionar Pedido</th>
-                                <th sec:authorize="hasRole('ADMIN')">Editar</th>
-                                <th sec:authorize="hasRole('ADMIN')">Apagar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="comida : ${comidas}">
-                                <td th:text="${comida.codComida}"></td>
-                                <td th:text="${comida.descricao}"></td>
-                                <td th:text="${comida.valor}"></td>
-                                <td sec:authorize="hasRole('GARCOM')"><a
-                                        th:href="/comidas/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
-                                        class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></a>
-                                </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/estudantes/editar/{matricula}(matricula=${estudante.matricula})}"
-                                        class="btn btn-primary" ><i class="fas fa-user-edit ml-2">Editar</i></a>
-                                </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/comidas/apagar/{codComida}(codComida=${comida.codComida})}"
-                                        class="btn btn-primary"><i class="fas fa-user-times ml-2">Apagar</i></a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
-                </div>
-
-                <div class="col-md-10">
-                    <h2 th:case="null">Bebidas!</h2>
-                    <div th:case="*">
-                        <table class="table table-striped table-responsive-md">
-                            <thead>
-                            <tr>
-                                <th>Código</th>
-                                <th>Descrição</th>
-                                <th>Valor</th>
-                                <th sec:authorize="hasRole('GARCOM')">Adicionar Pedido</th>
-                                <th sec:authorize="hasRole('ADMIN')">Editar</th>
-                                <th sec:authorize="hasRole('ADMIN')">Apagar</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr th:each="comida : ${comidas}">
-                                <td th:text="${comida.codComida}"></td>
-                                <td th:text="${comida.descricao}"></td>
-                                <td th:text="${comida.valor}"></td>
-                                <td sec:authorize="hasRole('GARCOM')"><a
-                                        th:href="/comidas/cadastrar" sec:authorize="hasRole('GARCOM')" class="btn btn-primary"><i
-                                        class="fas fa-user-plus ml-2 "> Adicionar Pedido</i></a>
-                                </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/estudantes/editar/{matricula}(matricula=${estudante.matricula})}"
-                                        class="btn btn-primary" ><i class="fas fa-user-edit ml-2">Editar</i></a>
-                                </td>
-                                <td sec:authorize="hasRole('ADMIN')"><a
-                                        th:href="@{/comidas/apagar/{codComida}(codComida=${comida.codComida})}"
-                                        class="btn btn-primary"><i class="fas fa-user-times ml-2">Apagar</i></a></td>
-                            </tr>
-                            </tbody>
-                        </table>
-
-                    </div>
-
                 </div>
             </div>
         </div>
